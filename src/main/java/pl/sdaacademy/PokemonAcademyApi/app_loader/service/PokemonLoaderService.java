@@ -2,13 +2,12 @@ package pl.sdaacademy.PokemonAcademyApi.app_loader.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.sdaacademy.PokemonAcademyApi.app_loader.repository.PokeapiRepository;
-import pl.sdaacademy.PokemonAcademyApi.app_loader.repository.PokemonRepository;
-import pl.sdaacademy.PokemonAcademyApi.app_loader.repository.PokemonResponse;
-import pl.sdaacademy.PokemonAcademyApi.app_loader.repository.PokemonResult;
+import pl.sdaacademy.PokemonAcademyApi.app_loader.repository.*;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PokemonLoaderService {
@@ -22,6 +21,7 @@ public class PokemonLoaderService {
         this.pokemonRepository = pokemonRepository;
     }
 
+    @PostConstruct
     public void loadPokemonList() {
         PokemonResponse pokemonResponse;
         List<PokemonResult> pokemonResults = new ArrayList<>();
@@ -33,5 +33,12 @@ public class PokemonLoaderService {
             pokemonResults.addAll(pokemonResponse.getResults());
             offset+=limit;
         } while (pokemonResponse.getNext() != null);
+        List<Pokemon> pokemons = pokemonResults.stream()
+                .map(pokemonResult -> {
+                    String[] urlData = pokemonResult.getUrl().split("/");
+                    int id = Integer.parseInt(urlData[urlData.length - 1]);
+                    return new Pokemon(id, pokemonResult.getName(), pokemonResult.getUrl());
+                }).collect(Collectors.toList());
+        pokemonRepository.saveAll(pokemons);
     }
 }
