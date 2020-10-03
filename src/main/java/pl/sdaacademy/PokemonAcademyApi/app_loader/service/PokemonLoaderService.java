@@ -8,7 +8,6 @@ import pl.sdaacademy.PokemonAcademyApi.app_loader.repository.*;
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class PokemonLoaderService {
@@ -42,7 +41,7 @@ public class PokemonLoaderService {
             pokemonResponse =
                     pokeapiRepository.getPokemonResponse(offset, limit);
             pokemonResults.addAll(pokemonResponse.getResults());
-            offset+=limit;
+            offset += limit;
         } while (pokemonResponse.getNext() != null);
         List<Pokemon> pokemons = pokemonTransformer.transformToPokemonList(pokemonResults);
         pokemonRepository.saveAll(pokemons);
