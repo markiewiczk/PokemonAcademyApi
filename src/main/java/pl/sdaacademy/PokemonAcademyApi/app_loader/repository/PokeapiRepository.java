@@ -1,7 +1,9 @@
 package pl.sdaacademy.PokemonAcademyApi.app_loader.repository;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
+@Repository
 public class PokeapiRepository {
 
     private static final String URL =
