@@ -1,4 +1,4 @@
-package pl.sdaacademy.PokemonAcademyApi.pokemon_details.service;
+package pl.sdaacademy.PokemonAcademyApi.common.service;
 
 public class NoPokemonFoundException extends RuntimeException {
 

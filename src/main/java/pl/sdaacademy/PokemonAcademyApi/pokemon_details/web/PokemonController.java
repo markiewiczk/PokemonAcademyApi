@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.sdaacademy.PokemonAcademyApi.app_loader.repository.Pokemon;
 import pl.sdaacademy.PokemonAcademyApi.pokemon_details.repository.PokemonDetails;
 import pl.sdaacademy.PokemonAcademyApi.pokemon_details.service.PokemonDetailsService;
 

@@ -2,7 +2,7 @@ package pl.sdaacademy.PokemonAcademyApi.pokemon_details.service;
 
 import org.springframework.stereotype.Component;
 import pl.sdaacademy.PokemonAcademyApi.pokemon_details.repository.PokemonDetails;
-import pl.sdaacademy.PokemonAcademyApi.pokemon_details.repository.PokemonDetailsResponse;
+import pl.sdaacademy.PokemonAcademyApi.pokemon_details.repository.pokeapi.PokemonDetailsResponse;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,7 +24,7 @@ public class PokemonDetailsTransformer {
         List<String> abilities = pokemonDetailsResponse.getAbilities()
                 .stream().map(
                         (ability -> ability.getAbilityDetails().getName()))
-                        .collect(Collectors.toList());
+                .collect(Collectors.toList());
 
         List<String> types = pokemonDetailsResponse.getTypes()
                 .stream().map(type -> type.getTypeDetails().getName())
