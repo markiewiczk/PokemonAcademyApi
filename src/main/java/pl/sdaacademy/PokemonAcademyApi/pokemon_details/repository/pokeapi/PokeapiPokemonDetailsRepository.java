@@ -5,12 +5,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
 @Repository
-public class PokemonDetailsRepository {
+public class PokeapiPokemonDetailsRepository {
 
     private final RestTemplate restTemplate;
 
     @Autowired
-    public PokemonDetailsRepository(RestTemplate restTemplate) {
+    public PokeapiPokemonDetailsRepository(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
