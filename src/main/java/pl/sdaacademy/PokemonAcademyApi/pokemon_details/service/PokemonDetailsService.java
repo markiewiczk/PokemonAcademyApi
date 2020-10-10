@@ -39,17 +39,12 @@ public class PokemonDetailsService {
     }
 
     public List<PokemonDetails> getPokemonDetails(List<String> pokemonNames) {
-        return pokemonNames.stream().map((String pokemonName)-> {
-            return pokemonRepository.findByName(pokemonName);
-        }).filter((Optional<Pokemon> pokemonOptional)->{
-            return pokemonOptional.isPresent();
-        }).map((Optional<Pokemon> pokemonDetails)->{
-            return pokemonDetails.get();
-        }).map((Pokemon pokemon) ->{
-            return pokemonDetailsRepository
-                    .getPokemonDetailsResponse(pokemon.getUrl());
-        }).map((PokemonDetailsResponse pokemonDetailsResponse)->{
-            return pokemonDetailsTransformer.transformToPokemonDetails(pokemonDetailsResponse);
-        }).collect(Collectors.toList());
+        return pokemonNames.stream().map(pokemonRepository::findByName)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .map(Pokemon::getUrl)
+                .map(pokemonDetailsRepository::getPokemonDetailsResponse)
+                .map(pokemonDetailsTransformer::transformToPokemonDetails)
+                .collect(Collectors.toList());
     }
 }
