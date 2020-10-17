@@ -27,4 +27,5 @@ public class PokemonController {
     public List<PokemonDetails> getPokemons(@RequestParam List<String> name) {
         return pokemonDetailsService.getPokemonDetails(name);
     }
+
 }

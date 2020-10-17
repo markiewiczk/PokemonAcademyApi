@@ -33,8 +33,8 @@ public class PokemonDetailsService {
         this.pokemonDetailsRepository = pokemonDetailsRepository;
     }
 
-    public PokemonDetails getPokemonDetails(String name) {
-        Pokemon pokemon = pokemonRepository.findByName(name).orElseThrow(() -> {
+    public PokemonDetails getPokemonDetails(String name) throws NoPokemonFoundException{
+        Pokemon pokemon = pokemonRepository.findByName(name).<NoPokemonFoundException>orElseThrow(() -> {
             throw new NoPokemonFoundException(name);
         });
         return providePokemonDetails(pokemon);
