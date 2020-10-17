@@ -30,7 +30,7 @@ public class TestController {
 
     @GetMapping
     public List<Test> testPagination(@RequestParam int page, @RequestParam int size) {
-        Pageable pageable = PageRequest.of(page-1,size);
+        Pageable pageable = PageRequest.of(page - 1, size);
         Page<Test> items = testRepository.findAll(pageable);
         return items.get().collect(Collectors.toList());
     }
