@@ -1,5 +1,7 @@
 package pl.sdaacademy.PokemonAcademyApi.pokemon_list_item.service;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.sdaacademy.PokemonAcademyApi.common.repository.Pokemon;
 import pl.sdaacademy.PokemonAcademyApi.common.repository.PokemonRepository;
@@ -25,6 +27,11 @@ public class PokemonListService {
     }
 
     public List<PokemonListItem> getPokemonListItem() {
+        ///zestaw danych 100 elementów
+        //strona 1: 1-10
+        //strona 2: 11-20
+        //strona 3: 21-30
+        Pageable pageable = PageRequest.of(3, 10);
         return pokemonRepository.findAll()
                 .stream()
                 .map(Pokemon::getUrl)
