@@ -51,7 +51,7 @@ public class PokemonDetailsService {
     private PokemonDetails providePokemonDetails(Pokemon pokemon) {
         return pokemonDetailsRepository
                 .findById(pokemon.getName())
-                .orElseGet(()->{
+                .orElseGet(() -> {
                     PokemonDetails pokemonDetails =
                             getPokemonDetailsFromApi(pokemon.getUrl());
                     savePokemonDetailsToRepo(pokemonDetails);
@@ -67,6 +67,6 @@ public class PokemonDetailsService {
 
     private void savePokemonDetailsToRepo(PokemonDetails details) {
         pokemonDetailsRepository.findById(details.getName())
-                .orElseGet(()-> pokemonDetailsRepository.save(details));
+                .orElseGet(() -> pokemonDetailsRepository.save(details));
     }
 }
