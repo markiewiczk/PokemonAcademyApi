@@ -1,5 +1,6 @@
 package pl.sdaacademy.PokemonAcademyApi.pokemon_list_item.service;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,13 +20,16 @@ public class PokemonListService {
     private final PokemonRepository pokemonRepository;
     private final PokeapiPokemonListItemRepository pokeapiPokemonListItemRepository;
     private final PokemonListItemTransformer pokemonListItemTransformer;
+    private final String pagingUrl;
 
     public PokemonListService(PokemonRepository pokemonRepository,
                               PokeapiPokemonListItemRepository pokeapiPokemonListItemRepository,
-                              PokemonListItemTransformer pokemonListItemTransformer) {
+                              PokemonListItemTransformer pokemonListItemTransformer,
+                              @Value("{paa.paging.url}")String pagingUrl) {
         this.pokemonRepository = pokemonRepository;
         this.pokeapiPokemonListItemRepository = pokeapiPokemonListItemRepository;
         this.pokemonListItemTransformer = pokemonListItemTransformer;
+        this.pagingUrl = pagingUrl;
     }
 
     public PokemonList getPokemonListItem(int page, int size) {
@@ -46,7 +50,7 @@ public class PokemonListService {
     private String getNextLink(int page, int size, int totalPages) {
         String next = null;
         if (page < totalPages) {
-            next = String.format("http://localhost:8081/pokemons/list?page=%d&size=%d", page + 1, size);
+            next = String.format(pagingUrl, page + 1, size);
         }
         return next;
     }
@@ -54,7 +58,7 @@ public class PokemonListService {
     private String getPrevLink(int page, int size) {
         String prev = null;
         if (page > 1) {
-            prev = String.format("http://localhost:8081/pokemons/list?page=%d&size=%d", page - 1, size);
+            prev = String.format(pagingUrl, page - 1, size);
         }
         return prev;
     }
