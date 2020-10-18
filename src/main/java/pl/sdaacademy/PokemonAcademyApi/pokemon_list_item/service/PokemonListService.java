@@ -25,7 +25,7 @@ public class PokemonListService {
     public PokemonListService(PokemonRepository pokemonRepository,
                               PokeapiPokemonListItemRepository pokeapiPokemonListItemRepository,
                               PokemonListItemTransformer pokemonListItemTransformer,
-                              @Value("{paa.paging.url}")String pagingUrl) {
+                              @Value("${paa.paging.url}")String pagingUrl) {
         this.pokemonRepository = pokemonRepository;
         this.pokeapiPokemonListItemRepository = pokeapiPokemonListItemRepository;
         this.pokemonListItemTransformer = pokemonListItemTransformer;
