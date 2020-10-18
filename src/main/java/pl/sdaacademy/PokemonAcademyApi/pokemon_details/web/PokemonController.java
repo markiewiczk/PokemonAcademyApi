@@ -19,11 +19,13 @@ public class PokemonController {
     }
 
     @GetMapping("/{name}")
+    @CrossOrigin
     public PokemonDetails getPokemon(@PathVariable String name) {
         return pokemonDetailsService.getPokemonDetails(name);
     }
 
     @GetMapping
+    @CrossOrigin
     public List<PokemonDetails> getPokemons(@RequestParam List<String> name) {
         return pokemonDetailsService.getPokemonDetails(name);
     }
